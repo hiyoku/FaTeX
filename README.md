@@ -10,6 +10,7 @@ Just use any LaTeX editor like:
 - Texstudio
 - Atom (With plugins)
 - Visual Studio Code (With plugins)
+
 Or online editor:
 - ShareLaTeX
 
