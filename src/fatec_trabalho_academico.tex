@@ -1,0 +1,361 @@
+% Trabalho Academico FATEC-SJC v-1.1
+% Criado por Marcos Hideki Inoue Junior
+
+% -- Iniciando o documento --
+\documentclass[
+	12pt,		% Tamanho da fonte
+	a4paper,	% Tamanho do papel
+	english,	% Idioma adicional
+	brazil,		% Idioma principal
+	openright,	% Capitulos começam em pag impar
+	oneside		% Apenas 1 página por folha
+	]{abntex2}
+
+\usepackage{lmodern}			% Usa a fonte Latin Modern
+\usepackage[T1]{fontenc}		% Selecao de codigos de fonte.
+\usepackage[utf8]{inputenc}		% Codificacao do documento
+\usepackage{lastpage}			% Usado pela Ficha catalográfica
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{color}				% Controle das cores
+\usepackage{xcolor}
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{microtype} 			% para melhorias de justificação
+\usepackage{lipsum}				% para geração de dummy text
+\usepackage{geometry}			% para alteração no layout das páginas
+\usepackage{lscape}             % colocar páginas na horizontal compativel com longtable e supertabular.
+\usepackage{bookmark}
+\usepackage{caption}            % adiciona \caption*{d} para criar fontes em imagens.
+\usepackage{float}				% para uso no posicionamento de imagens
+\usepackage{pdfpages}
+\usepackage{minibox}
+\usepackage{listings}
+\usepackage{multirow}           % Habilita o Merge de celulas na table
+
+% ---
+% Alterações no modelo original da abnTex2
+% ---
+% Impressão da Capa
+\renewcommand{\imprimircapa}{%
+  \begin{capa}%
+    \center
+    \ABNTEXchapterfont\large\imprimirinstituicao\\
+    \vspace{5cm}
+    \imprimirautor
+
+    \vfill
+    \begin{center}
+    \ABNTEXchapterfont\bfseries\LARGE\imprimirtitulo
+    \end{center}
+    \vfill
+
+    \large\imprimirlocal
+
+    \large\imprimirdata
+
+    \vspace*{1cm}
+  \end{capa}
+}
+% ---
+% Alteração na assinatura dos componentes da banca
+\setlength{\ABNTEXsignwidth}{10cm}
+
+\geometry{
+ a4paper,
+ bottom=2cm,
+ top=3cm,
+ left=3cm,
+ right=2cm
+}
+
+% ---
+% Configura layout para elementos textuais
+\renewcommand{\textual}{%
+  \pagestyle{plain}%abntheadings
+  %\nouppercaseheads%
+  \bookmarksetup{startatroot}%
+  \pagenumbering{arabic}
+}
+
+\renewcommand{\pretextual}{%
+  \pagestyle{plain}
+  \pagenumbering{Roman}
+}
+
+%%% -----
+%%% Formato de cabeçalho/rodapé romano nos elementos pré-textuais
+%%% -----
+
+%% Novo estilo
+\makepagestyle{estilo_pretextual} %%% escolha um nome
+  %\makeevenhead{estilo_pretextual}{}{}{\ABNTEXfontereduzida \textbf \thepage}
+  \makeoddhead{estilo_pretextual}{}{}{\ABNTEXfontereduzida \textbf \thepage}
+
+%% Customiza comando \pretextual
+\renewcommand{\pretextual}{
+  \pagenumbering{Roman} %%% ou \pagenumbering{Roman}
+  \aliaspagestyle{chapter}{estilo_pretextual}% customizing chapter pagestyle
+  \pagestyle{estilo_pretextual}
+  \aliaspagestyle{cleared}{empty}
+  \aliaspagestyle{part}{estilo_pretextual}
+}
+
+% ---
+% Ajusta a marca \textual para que a numeração volte a ser arábica
+% nos elementos textuais
+\let\oldtextual\textual        % copia o comando \textual anterior para \oldtextual
+\renewcommand{\textual}{%
+  \pagestyle{plain}%abntheadings
+  %\nouppercaseheads%
+  \aliaspagestyle{chapter}{plain}
+  \bookmarksetup{startatroot}%
+  \pagenumbering{arabic}
+}
+% ---
+
+\makeatletter
+\renewcommand*{\ps@plain}{%
+  \let\@mkboth\@gobbletwo
+  \let\@oddhead\@empty
+  \def\@oddfoot{%
+    \reset@font
+    \hfil
+    \thepage
+    % \hfil % removed for aligning to the right
+  }%
+  \let\@evenhead\@empty
+  \let\@evenfoot\@oddfoot
+}
+\makeatother
+
+% ---
+% Pacotes de citações
+% ---
+\usepackage[brazilian, hyperpageref]{backref}	 % Paginas com as citações na bibl
+\usepackage[alf]{abntex2cite}	% Citações padrão ABNT
+
+
+
+% ---
+% CONFIGURAÇÕES DE PACOTES
+% ---
+
+% ---
+% Configurações do pacote backref
+% Usado sem a opção hyperpageref de backref
+\renewcommand{\backrefpagesname}{Citado na(s) página(s):~}
+% Texto padrão antes do número das páginas
+\renewcommand{\backref}{}
+% Define os textos da citação
+\renewcommand*{\backrefalt}[4]{
+	\ifcase #1 %
+		Nenhuma citação no texto.%
+	\or
+		Citado na página #2.%
+	\else
+		Citado #1 vezes nas páginas #2.%
+	\fi}%
+% ---
+
+% ---
+% Informações de dados para CAPA e FOLHA DE ROSTO
+% ---
+\include{information}
+% informações do PDF
+\makeatletter
+\hypersetup{
+     	%pagebackref=true,
+		pdftitle={\@title},
+		pdfauthor={\@author},
+    	pdfsubject={\imprimirpreambulo},
+	    pdfcreator={LaTeX with abnTeX2},
+		pdfkeywords={abnt}{latex}{abntex}{abntex2}{trabalho acadêmico},
+		colorlinks=true,       		% false: boxed links; true: colored links
+    	linkcolor=blue,          	% color of internal links
+    	citecolor=blue,        		% color of links to bibliography
+    	filecolor=magenta,      		% color of file links
+		urlcolor=blue,
+		bookmarksdepth=4
+}
+\makeatother
+
+% ---
+% Espaçamentos entre linhas e parágrafos
+% ---
+\setlength{\parindent}{1.3cm} % Tamanho do parágrafo
+
+% Controle do espaçamento entre um parágrafo e outro:
+\setlength{\parskip}{0.2cm}  % tente também \onelineskip
+
+% ---
+% compila o indice
+% ---
+\makeindex
+% ---
+
+% ----
+% Início do documento
+% ----
+\begin{document}
+\pretextual
+\selectlanguage{brazil}
+\frenchspacing % Retira espaço extra obsoleto entre as frases
+
+% ---
+% Configuring all citations
+\citeoption{abnt-etal-list=0}
+\citeoption{abnt-last-names=abnt}
+\citeoption{abnt-full-initials=yes}
+% ---
+
+% ---
+% Configuring listing code
+% See references on internet
+% ---
+\lstdefinestyle{customc}{
+  belowcaptionskip=1\baselineskip,
+  breaklines=true,
+  %frame=L,
+  xleftmargin=\parindent,
+  language=C,
+  numbers=left,
+  showstringspaces=false,
+  frame=single,
+  basicstyle=\footnotesize\ttfamily,
+  keywordstyle=\bfseries\color{green!40!black},
+  commentstyle=\itshape\color{purple!40!black},
+  identifierstyle=\color{blue},
+  stringstyle=\color{orange},
+}
+
+\lstset{escapechar=@,style=customc}
+
+% ---
+
+% ---
+% Capa
+% ---
+\imprimircapa
+% ---
+
+% ---
+% Folha de rosto
+% (o * indica que haverá a ficha bibliográfica)
+% ---
+\thispagestyle{empty}
+\imprimirfolhaderosto
+% ---
+
+% ---
+% Inserir a ficha bibliografica
+% ---
+
+\begin{fichacatalografica}
+    %\includepdf{./testFicha}
+    \include{pre_cip}
+\end{fichacatalografica}
+
+% ---
+% Folha de aprovação
+% ---
+%\include{pre_folhaAprov}
+\includepdf[]{folhaAprov.pdf}
+% ---
+
+% ---
+% Dedicatória
+% ---
+\include{pre_dedic}
+% ---
+
+% ---
+% Agradecimentos
+% ---
+\include{pre_agrad}
+% ---
+
+% ---
+% Epigrafe
+% ---
+\include{pre_epigrafe}
+% ---
+
+% ---
+% RESUMOS
+% ---
+\include{pre_resumos}
+% ---
+
+% ---
+% inserir lista de ilustrações
+% ---
+\pdfbookmark[0]{\listfigurename}{lof}
+\listoffigures*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de tabelas
+% ---
+\pdfbookmark[0]{\listtablename}{lot}
+\listoftables*
+\cleardoublepage
+% ---
+
+% ---
+% inserir lista de abreviaturas e siglas
+% ---
+\include{pre_listaSiglas}
+% ---
+
+% ---
+% inserir lista de símbolos
+% ---
+\include{pre_listaSimb}
+% ---
+% ---
+% inserir o sumario
+% ---
+\pdfbookmark[0]{\contentsname}{toc}
+\tableofcontents*
+\cleardoublepage
+% ---
+
+% ----------------------------------------------------------
+% ELEMENTOS TEXTUAIS
+% ----------------------------------------------------------
+
+\textual
+
+\setcounter{page}{15}
+% ---
+% Incluindo Capitulo 1 - Introducao
+% ---
+\include{cap1_intro}
+
+% ---
+
+% ---
+% Incluindo Capitulo 2 - Fundamentacao Teorica
+\include{cap2_cont}
+% ---
+
+% ---
+% Incluindo Capitulo 3 - Desenvolvimento
+\include{cap3_dev}
+% ---
+
+% ---
+% Incluindo Capitulo 4 - Casos de Testes
+\include{cap4_cases}
+% ---
+
+% ---
+% Incluindo Capitulo 5 - Conclusao
+\include{cap5_concl}
+% ---
+
+% ---
+% Referências bibliográficas
+\bibliography{./ref/referencias}
+% ---
+\end{document}

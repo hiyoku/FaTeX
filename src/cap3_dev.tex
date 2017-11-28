@@ -1,0 +1,176 @@
+	\newpage
+\chapter{Desenvolvimento}
+\label{ch:desenvolvimento}
+\par Neste capítulo serão analisados, classificados e demonstrados as ameaças que violam os critérios de segurança de redes sem fio. Para isso será utilizado um cenário de testes isolado para a investigação e mitigação dos mesmos.
+\par O crit\'erio utilizado para classificar os ataques ser\~ao: Explorabilidade, detectabilidade e os impactos.
+
+% ---
+% Section eavesdropping
+% ---
+\section{Escuta Passiva}
+\label{sec:3sniffer} 
+\par A escuta passiva é uma ameaça em redes \emph{IoT} na qual não é possível detectar vide \autoref{sec:2sniffing}. \'E uma amea\c{c}a que compromete a confidencialidade da rede e \'e classificada como uma vulnerabilidade de alto risco, por ser f\'acil de ser explorada e indetectavel.
+
+\subsection{Metodologia do ataque}
+\par Para se realizar uma escuta passiva em uma \emph{WMN} é necessário ter um adaptador em modo prom\'iscuo, na qual permita apenas receber os pacotes que est\~ao no alcance. Com o aux\'ilio do software visualizador de pacotes \emph{Wireshark} é possível visualizar os pacotes que o adaptador irá capturar, Vale ressaltar que o canal a ser observado deve ser a mesma que o da rede alvo.
+
+\begin{figure}[ht]
+	\centering
+	\caption{Adaptador USB da Atmel para baixa frequência.}
+    \includegraphics[width=\textwidth, height=200pt, keepaspectratio]{figuras/wirelessSensor}
+    \fonte{Elaborada pelo autor.}    
+    \label{fig:usbAdapter}
+\end{figure}
+
+\par Não foi utilizada uma descoberta de redes automática para identificar em qual canal a rede está operando por causa do firmware desenvolvido no Adaptador USB da Atmel, logo foi percorrido todos os canais possíveis para descobrir se há alguma rede operando e em qual canal.
+
+\par Ap\'os a identifica\c{c}\~ao do canal e a rede a ser observada, ao analisar as informa\c{c}\~oes dos pacotes capturados, \'e poss\'ivel obter informa\c{c}\~oes sens\'iveis da rede, como o \emph{SSID}, endere\c{c}o de destino e de origem e o conte\'udo do pacote.
+
+\begin{figure}[ht]
+	\centering
+	\caption{\emph{Pacote capturado pelo \emph{sniffer}.}}
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{figuras/pacoteExemplo}
+	\fonte{Elaborada pelo autor.}
+    \label{fig:printPackage}
+\end{figure}
+
+\par Como visto na \autoref{fig:printPackage}, o \emph{sniffer} utilizado obteve os pacotes que trafegavam na rede com sucesso. Com os pacotes obtidos foi possível obter o endereço da rede, o número do pacote, o endereço do remetente e destinatário e o conteúdo do pacote, com um estudo acima dos protocolos estudados para redes de \emph{IoT} foi poss\'ivel concluir que n\~ao h\'a um meio de proteger as informa\c{c}\~oes do cabe\c{c}alho, s\'o h\'a como proteger o conte\'udo \emph{(payload)} do pacote.
+
+\subsection{Implementação da mitigação}
+\par O principal meio para a mitiga\c{c}\~ao deste problema \'e utilizar uma criptografia para garantir a privacidade, integridade e a autenticidade da informa\c{c}\~ao.
+
+\par A implementa\c{c}\~ao de uma criptografia em microcontroladores pode ser feita na camada de \emph{hardware}, ou tamb\'em na camada de aplica\c{c}\~ao. Na camada de aplica\c{c}\~ao a implementa\c{c}\~ao pode ser realizada atrav\'es da inser\c{c}\~ao de um algoritmo de criptografia, entretanto pode ocorrer perdas de desempenho ao utilizar recursos do microcontrolador para encriptar e desencriptar. J\'a na camada de \emph{hardware} a encripta\c{c}\~ao e a desencripta\c{c}\~ao \'e feita atrav\'es de um \emph{hardware} dedicado sem influenciar o desempenho do microcontrolador, logo recomenda-se o uso de uma criptografia com acelera\c{c}\~ao de \emph{hardware}.
+
+\begin{lstlisting}[label={lst:packet}]
+// Release transmission with security
+appNwkAddrReq.dstAddr = 0;
+appNwkAddrReq.dstEndpoint = APP_ENDPOINT_DYN_ADDR;
+appNwkAddrReq.srcEndpoint = APP_ENDPOINT_DYN_ADDR;
+appNwkAddrReq.options = NWK_OPT_ACK_REQUEST | NWK_OPT_ENABLE_SECURITY;
+appNwkAddrReq.data = (uint8_t *) &AppMsgDynAddr;
+appNwkAddrReq.size = sizeof(AppMsgDynAddr);
+appNwkAddrReq.confirm = appRelsConf;
+
+NWK_DataReq(&appNwkAddrReq);
+\end{lstlisting}
+
+\par O processo de encriptação e desencriptação não é explícito, ele apenas reconhece que o pacote deve ser encriptado na hora do envio ou desencriptado no recebimento pela opção \emph{NWK\_OPT\_ENABLE\_SECURITY} nas opções do pacote onde foi definido na linha 5 do trecho de c\'odigo acima.
+% ---
+
+
+% ---
+% Section Man In The Middle
+% ---
+\section{\emph{Man In The Middle}}
+\label{sec:3mitm}
+\par Este ataque compromete a integridade, confidencialidade e a disponibilidade da rede, pois o atacante ter\'a acesso \`a rede como um dispositivo autenticado e o mesmo abre oportunidades para diversos tipos de ataques, logo \'e considerado uma vulnerabilidade de alto risco.
+
+\subsection{Metodologia do ataque}
+\par Utilizando a técnica de \emph{sniffing} citado na \autoref{sec:2sniffing}, é possível obter o \emph{SSID (Service Set Identifier)} da rede alvo, e assim é possível criar um nó com um endereço aleatório onde ele pode se conectar na rede e pelo algoritmo de roteamento, o mesmo consegue receber os pacotes que trafegam na rede. Com isso, o atacante consegue explorar essa falha e encadear diversos tipos de ataques diferentes que ser\~ao citados ao decorrer do trabalho.
+
+\begin{figure}[ht]
+	\centering
+	\caption{N\'o estrategicamente posicionado para realizar o ataque.}
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{figuras/mitm301}
+	\fonte{Elaborada pelo autor.}
+    \label{fig:mitm301}
+\end{figure}
+
+\par Se a rede n\~ao possuir alguma prote\c{c}\~ao contra a leitura de pacotes, o invasor tem uma chance muito grande de obter a informa\c{c}\~ao de como é a estrutura e a forma de comunicação entre os nós e tornando possível a realiza\c{c}\~ao de uma injeção de informações erradas na base de dados por enviar informações aparentemente autênticas ou at\'e mesmo a inje\c{c}\~ao de comandos nos n\'os de forma ilegal. Fazendo assim com que o n\'o seja integrado na rede como mostra na \autoref{fig:mitm302}.
+
+\begin{figure}[ht]
+	\centering
+	\caption{N\'o malicioso acoplado na rede.}
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{figuras/mitm302}
+	\fonte{Elaborada pelo autor.}
+    \label{fig:mitm302}
+\end{figure}
+
+\par Pode se classificar este ataque como um ataque de alta amea\c{c}a, de risco moderado e complexidade alta.
+
+\subsection{Implementações da mitigação}
+\par Investigando mais a fundo redes sem fio, foi conclu\'ido que \'e necess\'ario para o bom funcionamento da rede um servi\c{c}o de entrega de endere\c{c}os, e para complementar \'e recomendado usar em conjunto com o padrão de \emph{whitelist} documentado por \citeonline{BonillaVillarreal2013}. O objetivo desta \emph{whitelist} é armazenar o endere\c{c}o \'unico de todos os n\'os da rede, para que apenas n\'os aut\^enticos recebam um endere\c{c}o definido pelo coordenador da rede, evitando assim que dispositivos maliciosos tenham acesso a esse servi\c{c}o e consequentemente acesso \`a rede.
+
+\par Cada nó terá que receber um endereço para se conectar com a rede, e seu endereço \'unico gerado pela aplica\c{c}\~ao será gravado no ato. Se o nó coordenador receber um pacote de um nó que não está cadastrado na rede, o mesmo será descartado. Os n\'os da rede tamb\'em ter\~ao essa pol\'itica, eles apenas aceitar\~ao pacotes que vem do endere\c{c}o \'unico do coordenador.
+
+\par A implementa\c{c}\~ao desta \emph{whitelist} se d\'a por uma estrutura para o armazenamento dos endere\c{c}os \'unicos, no nosso caso ser\'a utilizada uma lista de 128 posi\c{c}\~oes de \emph{unsigned int} de 16 bits \emph{(uint16\char`_t)} para armazenar 128 endereços \'unicos dos nós.
+
+\begin{table}[ht]
+    \centering
+    \caption{Exemplo da \emph{whitelist}}
+    \label{tab:whitelist}
+    
+    \begin{tabular}{|l|l|}
+    \hline
+    Índice & Endere\c{c}o \'unico \\ \hline
+    0      & 51348               \\ \hline
+    1      & 24867               \\ \hline
+    2      & 84661               \\ \hline
+    3      & 0                   \\ \hline
+    \end{tabular}
+\end{table}
+
+\par Como pode ser visto na \autoref{tab:whitelist}, o índice é o endereço do nó subtraído 1, e nesse índice está armazenado seu endereço \'unicos. Se a aplicação que roda no microcontrolador encontrar um índice cujo valor é 0, significa que o mesmo está disponível e pronto para ser armazenado um endereço \'unicos. No caso da \emph{whitelist} acima, o endere\c{c}o v\'alido ser\'a o 4, pois \'e o \'indice 3 que est\'a vago. 
+
+%tirar "ou seja"
+
+\par Ao receber um pacote, o n\'o dever\'a abrir o cabe\c{c}alho do pacote e verificar se seu endere\c{c}o de identifica\c{c}\~ao e seu endere\c{c}o \'unicos s\~ao v\'alidos, e essa informa\c{c}\~ao est\'a armazenada na \emph{whitelist}, ou seja, o microcontrolador dever\'a percorrer essa lista para a verifica\c{c}\~ao.
+% ---
+
+
+% ---
+% Section Flooding
+% ---
+\section{\emph{Flooding}}
+\label{sec:3flooding}
+\par O \emph{flooding} é uma vulnerabilidade da camada física que é relativamente fácil de ser lançada na camada de transporte de uma rede, que requer o mínimo de informações da rede que são facilmente obtidas através de um \emph{sniffer} visto na \autoref{sec:2sniffing}. Tendo em mãos o \emph{SSID} da rede, o que é mais demorado de se conseguir na rede é o canal em que a mesma está operando, já que o \emph{sniffer} tem que vasculhar canal por canal em busca de pacotes (O que em alguns casos pode demorar). \'E uma vulnerabilidade de m\'edio risco na qual tem o objetivo de causar a indisponibilidade da rede segundo: \autoref{sec:2dos}.
+
+\subsection{Metodologia do ataque}
+\par Para iniciar o ataque, o invasor precisa utilizar a t\'ecnica citada na \autoref{sec:2mitm}, entretanto o mesmo n\~ao precisa estar autenticado \`a rede, o mesmo precisa apenas estar na mesma rede com um endere\c{c}o v\'alido para conseguir enviar os pacotes em um \emph{endpoint} aberto.
+
+\par O atacante por meio da repetição de alguma requisição ou pacote, pode levar a rede ou algum n\'o à exaustão. O atacante pode fazer desde uma requisição de conexão repetitivamente ou enviar diversos pacotes vazios para ocupar a rede com o objetivo de fazer com que os nós deixem de responder, ou fazer o \emph{gateway} se sobrecarregar e consequentemente deixando de funcionar como exemplificado na \autoref{fig:flooding301}.
+
+\begin{figure}[ht]
+	\centering
+	\caption{N\'o malicioso realizando \emph{flooding}.}
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{figuras/flooding301}
+	\fonte{Elaborada pelo autor.}
+    \label{fig:flooding301}
+\end{figure}
+
+\par Pode se classificar este ataque como um ataque de baixa amea\c{c}a, com risco moderado e complexidade moderada.
+
+\subsection{Implementações da mitigação}
+\par Como este ataque tem como principal objetivo causar exaustão na rede, um coordenador potente para atender diversas requisi\c{c}\~oes pode ser uma solu\c{c}\~ao, entretanto se combinado com uma limita\c{c}\~ao de resposta, se torna mais efetivo ainda. Para limitar a resposta, foi criada e implementada uma pol\'itica na qual o coordenador s\'o ir\'a responder n\'os aut\^enticos e listados na \emph{whitelist} citado na \autoref{sec:2mitm}.
+
+\par As pol\'iticas nos dispositivos da rede em malha tem import\^ancia na mitiga\c{c}\~ao desta vulnerabilidade. Os \emph{End Devices} s\~ao dispositivos que geram informa\c{c}\~oes, que por ficarem em baterias eles n\~ao ficam sempre dispon\'iveis, os mesmos ficam ausentes at\'e o envio de alguma informa\c{c}\~ao. J\'a os \emph{Routers} s\~ao respon\'aveis pela propaga\c{c}\~ao da informa\c{c}\~ao pela rede at\'e chegar no seu destino, todavia, diferente dos \emph{End Devices}, eles ficam ligados em uma fonte de energia est\'avel, então n\~ao h\'a problemas de energia com os mesmos.
+
+\par Visando que um ataque desse tipo \'e emitido para causar a exaust\~ao cont\'inua, foi implementado um sistema na qual se um endere\c{c}o enviar uma requisi\~ao e o endere\c{c}o \'unico n\~ao conferir com o cadastrado na \emph{whitelist} citado na \autoref{sec:3mitm}, o coordenador emitir\'a um alerta para notificar a aplica\c{c}\~ao de um poss\'ivel ataque.
+
+\section{\emph{Jamming}}
+\label{sec:jammer}
+\par \emph{Jamming} \'e um ataque que atinge a camada f\'isica na rede e tem o objetivo causar a indisponibilidade da rede. \'E uma amea\c{c}a de alto risco e que pode ser utilizado para desencadear outros ataques, como por exemplo \'e poss\'ivel realizar um \emph{Man in The Middle} citado na \autoref{sec:2mitm} despercebido se a rede n\~ao possuir alguma implementa\c{c}\~ao de seguran\c{c}a que bloqueie a conex\~ao do n\'o invasor. Este ataque \'e de alto risco tanto para a confidencialidade tanto para a disponibilidade da rede. Pode ser considerada uma vulnerabilidade de risco m\'edio.
+
+\subsection{Metodologia do ataque} 
+\par Para realizar um \emph{jamming} \'e necess\'ario apenas uma placa programada para transmitir em uma pot\^encia alta diversos ru\'idos na rede. Em uma rede pequena como em \emph{Smart Home} causa indisponibilidade total dependendo do tamanho f\'isico da rede, j\'a em redes maiores, como \emph{smart cities}, causa a indisponibilidade de alguns n\'os na rede. O tipo mais comum de \emph{jamming} a ser lan\c{c}ado \'e o cont\'inuo e usualmente s\~ao lan\c{c}ado nos coordenadores, j\'a que o mesmo \'e o concentrador de toda a rede e \'e ele o respons\'avel por receber e enviar para a aplica\c{c}\~ao todas as informa\c{c}\~oes.
+
+\begin{figure}[ht]
+	\centering
+	\caption{N\'o malicioso realizando \emph{jamming} com sua \'area de abrang\^encia.}
+	\includegraphics[width=\textwidth, height=\textheight, keepaspectratio]{figuras/jamming301}
+	\fonte{Elaborada pelo autor.}
+    \label{fig:jamming301}
+\end{figure}
+
+\par A \autoref{fig:jamming301} exemplifica o ataque, o n\'o vermelho sendo o n\'o malicioso e o c\'irculo pontilhado mostra a \'area de atua\c{c}\~ao do \emph{jamming}, na qual bloqueia a comunica\c{c}\~ao do n\'o N1 com o resto da rede.
+
+\par Pode se classificar o \emph{jamming} como um ataque de alta amea\c{c}a, com risco moderado e de complexidade moderada.
+
+\subsection{Implementações da mitigação}
+\par Como todos ataques na camada física, o \emph{jammer} ainda não há meio de evitar, entretanto há a possibilidade de se detectar e desativar ataques desse tipo.
+
+\par Para detectar ataques desse tipo, a identificação dos nós é muito importante, j\'a que há a possibilidade de listar os nós que foram afetados e assim lista-los para a investigação e a localização aproximada do nó atacante. Pode ser utilizado uma placa de rede sem fio de baixa frequência e um sistema computacional móvel para se obter o sinal do nó atacante e delimitar ainda mais o raio de procura do nó malicioso até se obter a localização do nó e assim desativá-lo.
+
+\par Para garantir a disponibilidade dos n\'os, foi implementado um mecanismo de \emph{Keepalive} para garantir que todos os \emph{Routers} retornem sua disponibilidade e informa\c{c}\~oes, para realizar um controle efetivo da sa\'ude da rede para o coordenador, e assim na aplica\c{c}\~ao gerar um status de cada \emph{Router} para caso algum n\'o vier a ficar \emph{offline}, ser\'a poss\'ivel deduzir que h\'a algo de errado acontecendo, entretanto, utilizando o mecanismo de \emph{Keepalive}, abre oportunidades para o \emph{sniffing} documentado na \autoref{sec:2sniffing}, j\'a que os roteadores ir\~ao enviar pacotes de \emph{keepalive} com um intervalo de tempo fazendo com que o \emph{sniffer} obtenha uma quantidade maior de pacotes.
+
+\par Vale a pena ressaltar que a base de informa\c{c}\~ao para todos os ataques citados \'e o levantamento de informa\c{c}\~oes da rede utilizando a t\'ecnica de \emph{sniffing} citado na \autoref{sec:2sniffing}.

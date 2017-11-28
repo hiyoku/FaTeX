@@ -1,0 +1,290 @@
+% Encoding: UTF-8
+
+@InProceedings{alturkostani2015,
+  author =    {Alturkostani, Hani and Chitrakar, Anup and Rinker, Robert and Krings, Axel},
+  title =     {On the Design of Jamming-Aware Safety Applications in VANETs},
+  booktitle = {Proceedings of the 10th Annual Cyber and Information Security Research Conference},
+  year =      {2015},
+  series =    {CISR '15},
+  pages =     {7:1--7:8},
+  address =   {New York, NY, USA},
+  publisher = {ACM},
+  acmid =     {2746273},
+  articleno = {7},
+  doi =       {10.1145/2746266.2746273},
+  isbn =      {978-1-4503-3345-0},
+  keywords =  {DSRC, Jammer Detection, Jamming, VANET},
+  location =  {Oak Ridge, TN, USA},
+  numpages =  {8},
+  url =       {http://doi.acm.org/10.1145/2746266.2746273}
+}
+
+@article{Atzori2010a,
+title = "The Internet of Things: A survey ",
+journal = "Computer Networks ",
+volume = "54",
+number = "15",
+pages = "2787 - 2805",
+year = "2010",
+note = "",
+issn = "1389-1286",
+doi = "http://dx.doi.org/10.1016/j.comnet.2010.05.010",
+url = "http://www.sciencedirect.com/science/article/pii/S1389128610001568",
+author = "Luigi Atzori and Antonio Iera and Giacomo Morabito",
+keywords = "Internet of Things",
+keywords = "Pervasive computing",
+keywords = "RFID systems ",
+abstract = "This paper addresses the Internet of Things. Main enabling factor of this promising paradigm is the integration of several technologies and communications solutions. Identification and tracking technologies, wired and wireless sensor and actuator networks, enhanced communication protocols (shared with the Next Generation Internet), and distributed intelligence for smart objects are just the most relevant. As one can easily imagine, any serious contribution to the advance of the Internet of Things must necessarily be the result of synergetic activities conducted in different fields of knowledge, such as telecommunications, informatics, electronics and social science. In such a complex scenario, this survey is directed to those who want to approach this complex discipline and contribute to its development. Different visions of this Internet of Things paradigm are reported and enabling technologies reviewed. What emerges is that still major issues shall be faced by the research community. The most relevant among them are addressed in details. "
+}
+
+@InProceedings{hu2003,
+  author =       {Hu, Yih-Chun and Perrig, Adrian and Johnson, David B},
+  title =        {Packet leashes: a defense against wormhole attacks in wireless networks},
+  booktitle =    {INFOCOM 2003. Twenty-Second Annual Joint Conference of the IEEE Computer and Communications. IEEE Societies},
+  year =         {2003},
+  volume =       {3},
+  pages =        {1976--1986},
+  organization = {IEEE}
+}
+
+@TechReport{iot2008a,
+  author =      {INFSO D.4 Networked Enterprise \& RFID INFSO G.2 Micro \& Nanosystems, in: Co-operation with the Working Group RFID of the ETP EPOSS},
+  title =       {Internet of Things in 2020, A Roadmap for the future},
+  institution = {EUROPEAN TECHNOLOGY PLATFORM ON SMART SYSTEMS INTEGRATION},
+  year =        {2008}
+}
+
+@Article{karlof2003,
+  author =    {Karlof, Chris and Wagner, David},
+  title =     {Secure routing in wireless sensor networks: Attacks and countermeasures},
+  journal =   {Ad hoc networks},
+  year =      {2003},
+  volume =    {1},
+  number =    {2},
+  pages =     {293--315},
+  publisher = {Elsevier}
+}
+
+@TechReport{KPMG2015a,
+  author =      {Matuszak, Gary and Bell, Greg and Le, Danny},
+  title =       {Security and the IoT ecosystem},
+  institution = {KPMG International},
+  year =        {2015},
+  number =      {132631-G},
+  month =       dec
+}
+
+@InProceedings{Malgeri2009a,
+  author =    {Malgeri, John},
+  title =     {Cyber Security: A National Effort to Improve},
+  booktitle = {2009 Information Security Curriculum Development Conference},
+  year =      {2009},
+  series =    {InfoSecCD '09},
+  pages =     {107--113},
+  address =   {New York, NY, USA},
+  publisher = {ACM},
+  acmid =     {1940998},
+  doi =       {10.1145/1940976.1940998},
+  isbn =      {978-1-60558-661-8},
+  keywords =  {cyber security, information security},
+  location =  {Kennesaw, Georgia},
+  numpages =  {7},
+  url =       {http://doi.acm.org/10.1145/1940976.1940998}
+}
+
+@InProceedings{ngai2006,
+  author =       {Ngai, Edith CH and Liu, Jiangchuan and Lyu, Michael R},
+  title =        {On the intruder detection for sinkhole attack in wireless sensor networks},
+  booktitle =    {Communications, 2006. ICC'06. IEEE International Conference on},
+  year =         {2006},
+  volume =       {8},
+  pages =        {3383--3389},
+  organization = {IEEE}
+}
+
+@InProceedings{qi2012,
+  author =       {Qi, Jin and Hong, Tang and Xiaohui, Kuang and Qiang, Liu},
+  title =        {Detection and defence of Sinkhole attack in Wireless Sensor Network},
+  booktitle =    {Communication Technology (ICCT), 2012 IEEE 14th International Conference on},
+  year =         {2012},
+  pages =        {809--813},
+  organization = {IEEE}
+}
+
+@InProceedings{salehi2013,
+  author =       {Salehi, S Ahmad and Razzaque, Md Abdur and Naraei, Parisa and Farrokhtala, Ali},
+  title =        {Detection of sinkhole attack in wireless sensor networks},
+  booktitle =    {Space Science and Communication (IconSpace), 2013 IEEE International Conference on},
+  year =         {2013},
+  pages =        {361--365},
+  organization = {IEEE}
+}
+
+@InCollection{sen2013,
+  author =    {Sen, Jaydip},
+  title =     {Security and privacy issues in wireless mesh networks: A survey},
+  booktitle = {Wireless networks and security},
+  publisher = {Springer},
+  year =      {2013},
+  pages =     {189--272}
+}
+
+@InProceedings{siddiqui2007,
+  author =       {Siddiqui, Muhammad Shoaib and Hong, Choong Seon},
+  title =        {Security issues in wireless mesh networks},
+  booktitle =    {Multimedia and Ubiquitous Engineering, 2007. MUE'07. International Conference on},
+  year =         {2007},
+  pages =        {717--722},
+  organization = {IEEE}
+}
+
+@Article{welch2003a,
+  author =  {Welch, Donald J and Lathrop, Scott},
+  title =   {A survey of 802.11 a wireless security threats and security mechanisms},
+  journal = {United States Military Academy West Point},
+  year =    {2003}
+}
+
+@InProceedings{wilhelm2011a,
+  author =    {Wilhelm, Matthias and Martinovic, Ivan and Schmitt, Jens B. and Lenders, Vincent},
+  title =     {Short Paper: Reactive Jamming in Wireless Networks: How Realistic is the Threat?},
+  booktitle = {Proceedings of the Fourth ACM Conference on Wireless Network Security},
+  year =      {2011},
+  series =    {WiSec '11},
+  pages =     {47--52},
+  address =   {New York, NY, USA},
+  publisher = {ACM},
+  acmid =     {1998422},
+  doi =       {10.1145/1998412.1998422},
+  isbn =      {978-1-4503-0692-8},
+  keywords =  {802.15.4, WSN, reactive jamming, software-defined jammer},
+  location =  {Hamburg, Germany},
+  numpages =  {6},
+  url =       {http://doi.acm.org/10.1145/1998412.1998422}
+}
+
+@InProceedings{yuan2008,
+  author =    {Yuan, Xiaohong and Wright, Omari T. and Yu, Huiming and Williams, Kenneth A.},
+  title =     {Laboratory Design for Wireless Network Attacks},
+  booktitle = {Proceedings of the 5th Annual Conference on Information Security Curriculum Development},
+  year =      {2008},
+  series =    {InfoSecCD '08},
+  pages =     {5--12},
+  address =   {New York, NY, USA},
+  publisher = {ACM},
+  acmid =     {1456629},
+  doi =       {10.1145/1456625.1456629},
+  isbn =      {978-1-60558-333-4},
+  keywords =  {WEP, network laboratory exercise, wireless security},
+  location =  {Kennesaw, Georgia},
+  numpages =  {8},
+  url =       {http://doi.acm.org/10.1145/1456625.1456629}
+}
+
+@InProceedings{zhou2012,
+  author =       {Zhou, Jie and Cao, Jiannong and Zhang, Jun and Zhang, Chisheng and Yu, Yao},
+  title =        {Analysis and countermeasure for wormhole attacks in wireless mesh networks on a real testbed},
+  booktitle =    {Advanced Information Networking and Applications (AINA), 2012 IEEE 26th International Conference on},
+  year =         {2012},
+  pages =        {59--66},
+  organization = {IEEE}
+}
+
+@Article{wood2002,
+  author    = {Wood, Anthony D and Stankovic, John A},
+  title     = {Denial of service in sensor networks},
+  journal   = {Computer},
+  year      = {2002},
+  volume    = {35},
+  number    = {10},
+  pages     = {54--62},
+  publisher = {IEEE},
+}
+
+@ARTICLE{t,
+author={A. Zanella and N. Bui and A. Castellani and L. Vangelista and M. Zorzi},
+journal={IEEE Internet of Things Journal},
+title={Internet of Things for Smart Cities},
+year={2014},
+volume={1},
+number={1},
+pages={22-32},
+keywords={Internet;Internet of Things;protocols;Internet of Things;Padova smart city project;Smart City vision;advanced communication technology;digital services;heterogeneous end systems;link layer technology;protocols;urban IoT system;value-addedservices;Business;IEEE 802.15 Standards;Monitoring;Smart buildings;Smart homes;Urban areas;6lowPAN;Constrained Application Protocol (CoAP);Efficient XML Interchange (EXI);Smart Cities;network architecture;sensor system integration;service functions and management;testbed and trials},
+doi={10.1109/JIOT.2014.2306328},
+ISSN={2327-4662},
+month={Feb},}
+
+@inproceedings{BonillaVillarreal2013,
+ author = {Bonilla Villarreal, Isaura N. and Fernandez, Eduardo B. and Larrondo-Petrie, Maria M. and Hashizume, Keiko},
+ title = {Whitelisting Firewall Pattern (WLF)},
+ booktitle = {Proceedings of the 20th Conference on Pattern Languages of Programs},
+ series = {PLoP '13},
+ year = {2013},
+ isbn = {978-1-941652-00-8},
+ location = {Monticello, Illinois},
+ pages = {11:1--11:6},
+ articleno = {11},
+ numpages = {6},
+ url = {http://dl.acm.org/citation.cfm?id=2725669.2725683},
+ acmid = {2725683},
+ publisher = {The Hillside Group},
+ address = {USA},
+ keywords = {firewall, pattern, security patterns, threat prevention, whitelisting},
+} 
+
+@InProceedings{studyMITM,
+  author    = {H. Hwang and G. Jung and K. Sohn and S. Park},
+  title     = {A Study on MITM (Man in the Middle) Vulnerability in Wireless Network Using 802.1X and EAP},
+  booktitle = {Information Science and Security, 2008. ICISS. International Conference on},
+  year      = {2008},
+  pages     = {164-170},
+  month     = {Jan},
+  doi       = {10.1109/ICISS.2008.10},
+  keywords  = {message authentication;protocols;telecommunication security;wireless LAN;EAP;EAP-TTLS environment;IEEE 802.1X;MITM vulnerability;extensible authentication protocol;man in the middle vulnerability;tunneled transport layer security;wireless LAN security;Authentication;Communication system security;Cryptography;Hardware;Information science;Information security;Network servers;Wireless LAN;Wireless application protocol;Wireless networks},
+}
+
+@InProceedings{vlsiCript,
+  author    = {J. G. Pandey and A. Gurawa and H. Nehra and A. Karmakar},
+  title     = {An efficient VLSI architecture for data encryption standard and its FPGA implementation},
+  booktitle = {2016 International Conference on VLSI Systems, Architectures, Technology and Applications (VLSI-SATA)},
+  year      = {2016},
+  pages     = {1-5},
+  month     = {Jan},
+  doi       = {10.1109/VLSI-SATA.2016.7593054},
+  keywords  = {Algorithm design and analysis;Architecture;Ciphers;Computer architecture;Encryption;Very large scale integration;DES;FPGAs;VLSI architectures;block cipher;encryption/decryption;lightweight cryptography},
+}
+
+@Manual{r21DataSheet,
+  title        = {Atmel | SMART SAM R21 Datasheet},
+  author       = {Microchip Atmel},
+  organization = {Microchip},
+  address      = {1600 Technology Drive, San Jose, CA 95110 USA},
+  month        = may,
+  year         = {2016},
+  file         = {:r21DataSheet - Atmel _ SMART SAM R21 Datasheet.pdf:PDF},
+}
+
+@Standard{fips197,
+  title        = {NIST FIPS PUB 197: Advanced Encryption Standard (AES)},
+  organization = {US Department of Commerce/NIST},
+  institution  = {National Institute of Standards and Technology},
+  month        = nov,
+  year         = {2001},
+}
+
+@Article{iot2005itu,
+  author  = {Strategy, ITU and Unit, Policy},
+  title   = {ITU Internet Reports 2005: The internet of things},
+  journal = {Geneva: International Telecommunication Union (ITU)},
+  year    = {2005},
+}
+
+@Online{miraibotnet,
+  author  = {MultiMedia LLC},
+  title   = {KrebsOnSecurity Hit With Record DDoS},
+  year    = {2016},
+  url     = {https://krebsonsecurity.com/2016/09/krebsonsecurity-hit-with-record-ddos/},
+  urldate = {2016-09-21},
+}
+
+@Comment{jabref-meta: databaseType:bibtex;}
