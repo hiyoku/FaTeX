@@ -19,3 +19,6 @@ Or online editor:
 - Eduardo Sakaue
 - Giuliano Bertoti
 - Emanuel Mineda
+- Anna Karina
+- José Marchezi
+- Muller Lopes
