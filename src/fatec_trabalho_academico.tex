@@ -1,6 +1,3 @@
-% Trabalho Academico FATEC-SJC v-1.1
-% Criado por Marcos Hideki Inoue Junior
-
 % -- Iniciando o documento --
 \documentclass[
 	12pt,		% Tamanho da fonte
@@ -159,7 +156,7 @@
 % ---
 % Informações de dados para CAPA e FOLHA DE ROSTO
 % ---
-\include{information}
+\include{constantes}
 % informações do PDF
 \makeatletter
 \hypersetup{
@@ -259,7 +256,7 @@
 % ---
 
 % Descomentar para imprimir a folha
-\include{pre_folhaAprov}
+\include{pre_folha_aprovacao}
 
 % Descomentar quando o arquivo folhaAprov.pdf estiver no diretorio raiz
 %\includepdf[]{folhaAprov.pdf}
@@ -268,13 +265,13 @@
 % ---
 % Dedicatória
 % ---
-\include{pre_dedic}
+\include{pre_dedicatoria}
 % ---
 
 % ---
 % Agradecimentos
 % ---
-\include{pre_agrad}
+\include{pre_agradecimentos}
 % ---
 
 % ---
@@ -308,13 +305,13 @@
 % ---
 % inserir lista de abreviaturas e siglas
 % ---
-\include{pre_listaSiglas}
+\include{pre_lista_siglas}
 % ---
 
 % ---
 % inserir lista de símbolos
 % ---
-\include{pre_listaSimb}
+\include{pre_lista_simbolos}
 % ---
 % ---
 % inserir o sumario
@@ -334,28 +331,28 @@
 % ---
 % Incluindo Capitulo 1 - Introducao
 % ---
-\include{cap1_intro}
+\include{capitulos/1_introducao}
 
 % ---
 
 % ---
 % Incluindo Capitulo 2 - Fundamentacao Teorica
-\include{cap2_cont}
+\include{capitulos/2_fundamentacao}
 % ---
 
 % ---
 % Incluindo Capitulo 3 - Desenvolvimento
-\include{cap3_dev}
+\include{capitulos/3_desenvolvimento}
 % ---
 
 % ---
 % Incluindo Capitulo 4 - Casos de Testes
-\include{cap4_cases}
+\include{capitulos/4_cases}
 % ---
 
 % ---
 % Incluindo Capitulo 5 - Conclusao
-\include{cap5_concl}
+\include{capitulos/5_conclusao}
 % ---
 
 % ---
