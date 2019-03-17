@@ -42,13 +42,13 @@ To render a table, it's required a title, caption, label and the contents, like 
 To render a figure, it's required a image path, caption and label, like so:
 
 ```latex
-\figura{<IMAGE_PATH>}{<CAPTION>}{tab:<LABEL>}
+\figura{<IMAGE_PATH>}{<CAPTION>}{<FONTE>}{tab:<LABEL>}
 ```
 
 ##### Example
 
 ```latex
-\figura{img/logo-fatec-sjc.jpg}{Exemplo de uso de figura}{fig:logo_fatec_sjc}
+\figura{img/logo-fatec-sjc.jpg}{Exemplo de uso de figura}{Elaborada pelo autor}{fig:logo_fatec_sjc}
 ```
 
 ### Thanks to:

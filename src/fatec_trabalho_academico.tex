@@ -50,12 +50,13 @@
 % ---
 % Figura
 % ---
-\newcommand{\figura}[3]{
+\newcommand{\figura}[4]{
 	\begin{figure}[H]
+		\caption{#2 \label{#4}}
     \begin{center}
       \includegraphics[width=0.8\linewidth]{#1}
     \end{center}
-    \caption{#2 \label{#3}}
+    \fonte{#3}
   \end{figure}
 }
 
