@@ -39,10 +39,10 @@ To render a table, it's required a title, caption, label and the contents, like 
 
 #### `\figura`
 
-To render a figure, it's required a image path, caption and label, like so:
+To render a figure, it's required a image path, caption, source and label, like so:
 
 ```latex
-\figura{<IMAGE_PATH>}{<CAPTION>}{<FONTE>}{tab:<LABEL>}
+\figura{<IMAGE_PATH>}{<CAPTION>}{<SOURCE>}{tab:<LABEL>}
 ```
 
 ##### Example
