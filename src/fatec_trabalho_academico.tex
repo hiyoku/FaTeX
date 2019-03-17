@@ -30,6 +30,34 @@
 \usepackage{minibox}
 \usepackage{listings}
 \usepackage{multirow}           % Habilita o Merge de celulas na table
+\usepackage{tabularx}
+
+% ---
+% Tabela
+% ---
+\newcommand{\tabela}[4]{
+  \begin{table}[H]
+    \begin{center}
+      \textbf{#2}
+    \end{center}
+    \centering
+    #1
+    \caption{#3}
+    \label{#4}
+  \end{table}
+}
+
+% ---
+% Figura
+% ---
+\newcommand{\figura}[3]{
+	\begin{figure}[H]
+    \begin{center}
+      \includegraphics[width=0.8\linewidth]{#1}
+    \end{center}
+    \caption{#2 \label{#3}}
+  \end{figure}
+}
 
 % ---
 % Alterações no modelo original da abnTex2
