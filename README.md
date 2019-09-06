@@ -53,7 +53,7 @@ To render a figure, it's required a image path, caption, source and label, like 
 
 ### Thanks to:
 - [Diogo Branquinho](https://github.com/diogobranquinho)
-- Eduardo Sakaue
+- [Eduardo Sakaue](https://github.com/esakaue)
 - [Giuliano Bertoti](http://giulianobertoti.github.io/)
 - Emanuel Mineda
 - [Filipe Meneses](https://github.com/filipemeneses)
