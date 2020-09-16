@@ -32,18 +32,19 @@
 \usepackage{multirow}           % Habilita o Merge de celulas na table
 \usepackage{tabularx}
 
+% Ajustando o titulo e a fonte para ser alinhado a esquerda
+% para atender a ABNT2
+\captionsetup{justification=raggedright,singlelinecheck=false}
+
 % ---
 % Tabela
 % ---
 \newcommand{\tabela}[4]{
   \begin{table}[H]
-    \begin{center}
-      \textbf{#2}
-    \end{center}
+    \caption{#2 \label{#4}} 
     \centering
     #1
-    \caption{#3}
-    \label{#4}
+    \fonte{#3}
   \end{table}
 }
 
