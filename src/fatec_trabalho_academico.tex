@@ -31,19 +31,61 @@
 \usepackage{listings}
 \usepackage{multirow}           % Habilita o Merge de celulas na table
 \usepackage{tabularx}
+\usepackage{listings} %For code in appendix
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{inconsolata}
+\usepackage{color}
+\usepackage{listings}
+\usepackage{color}
+
+\usepackage{ragged2e}
+ 
+\usepackage[pagestyles]{titlesec}
+
+% Alterando o tamanno e fonte dos títulos
+\titleformat*{\section}{\large\selectfont}
+\titleformat*{\subsection}{\large\selectfont}
+\titleformat*{\subsubsection}{\large\selectfont}
+\titleformat{\chapter}%
+  {\selectfont\bfseries\Large}{\thechapter}{4pt}{}
+
+% Configurando trechos de codigo Java
+\definecolor{verdecpp}{rgb}{0,0.5,0}
+\definecolor{verdejava}{rgb}{0.25,0.5,0.35}
+\definecolor{jpurple}{rgb}{0.5,0,0.35}
+
+\lstdefinestyle{Java}
+{
+  language={Java},
+  basicstyle=\ttfamily\small, 
+  keywordstyle=\color{jpurple}\bfseries,
+  stringstyle=\color{red},
+  commentstyle=\color{verdejava},
+  morecomment=[s][\color{blue}]{/*}{/},
+  extendedchars=true, 
+  showspaces=false, 
+  showstringspaces=false, 
+  numbers=left,
+  numberstyle=\tiny,
+  breaklines=true, 
+  breakautoindent=true, 
+  captionpos=b,
+  xleftmargin=0pt,
+  tabsize=4
+}
 
 % ---
 % Tabela
 % ---
 \newcommand{\tabela}[4]{
   \begin{table}[H]
-    \begin{center}
-      \textbf{#2}
-    \end{center}
+    \caption{#2 \label{#4}} 
     \centering
     #1
-    \caption{#3}
-    \label{#4}
+    \captionsetup{justification=raggedright, singlelinecheck=false}
+    \fonte{#3}
   \end{table}
 }
 
@@ -56,6 +98,7 @@
     \begin{center}
       \includegraphics[width=0.8\linewidth]{#1}
     \end{center}
+    \captionsetup{justification=raggedright,singlelinecheck=false}
     \fonte{#3}
   \end{figure}
 }
@@ -107,7 +150,7 @@
 
 \renewcommand{\pretextual}{%
   \pagestyle{plain}
-  \pagenumbering{Roman}
+  \pagenumbering{roman}
 }
 
 %%% -----
@@ -121,7 +164,7 @@
 
 %% Customiza comando \pretextual
 \renewcommand{\pretextual}{
-  \pagenumbering{Roman} %%% ou \pagenumbering{Roman}
+  \pagenumbering{roman} %%% ou \pagenumbering{Roman}
   \aliaspagestyle{chapter}{estilo_pretextual}% customizing chapter pagestyle
   \pagestyle{estilo_pretextual}
   \aliaspagestyle{cleared}{empty}
@@ -321,6 +364,7 @@
 % ---
 % inserir lista de ilustrações
 % ---
+\renewcommand*\listfigurename{Lista de Figuras}
 \pdfbookmark[0]{\listfigurename}{lof}
 \listoffigures*
 \cleardoublepage
