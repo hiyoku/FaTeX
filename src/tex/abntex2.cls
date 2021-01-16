@@ -1064,14 +1064,14 @@
 \makeatletter
 \newcommand{\folhaderostocontent}{
   \begin{center}
-
     %\vspace*{1cm}
-    {\ABNTEXchapterfont\large\imprimirautor}
-	
+    \ABNTEXchapterfont\large\imprimirautor
+
     \vspace*{\fill}\vspace*{\fill}
     \begin{center}
       \ABNTEXchapterfont\bfseries\Large\imprimirtitulo
     \end{center}
+
     \vspace*{\fill}
 	
     \abntex@ifnotempty{\imprimirpreambulo}{%
@@ -1079,16 +1079,15 @@
       \begin{minipage}{.5\textwidth}
       	\SingleSpacing
          \imprimirpreambulo
-       \end{minipage}%
+       \end{minipage}
        \vspace*{\fill}
     }%
+    
+        \abntex@ifnotempty{\imprimirinstituicao}{\imprimirinstituicao\vspace*{\fill}}
+        \hfill \imprimirorientadorRotulo \imprimirorientador
+        
+        \abntex@ifnotempty{\imprimircoorientador}{\hfill \imprimircoorientadorRotulo \imprimircoorientador}
 
-    {\abntex@ifnotempty{\imprimirinstituicao}{\imprimirinstituicao\vspace*{\fill}}}
-
-    {\large\imprimirorientadorRotulo~\imprimirorientador\par}
-    \abntex@ifnotempty{\imprimircoorientador}{%
-       {\large\imprimircoorientadorRotulo~\imprimircoorientador}%
-    }%
     \vspace*{\fill}
 
     {\large\imprimirlocal}
@@ -1098,6 +1097,7 @@
 
   \end{center}
 }
+
 \makeatother
 
 \newcommand{\imprimirfolhaderostostar}[1]{%
